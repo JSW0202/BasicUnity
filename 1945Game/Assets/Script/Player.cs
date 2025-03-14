@@ -2,10 +2,18 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //���ǵ�
+    //스피드
     public float moveSpeed = 5f;
 
-    Animator ani; //�ִϸ����͸� ������ ����
+    Animator ani; //애니메이터를 가져올 변수
+
+    public GameObject bullet;  //총알 추후 4개 배열로 만들예정
+    public Transform pos = null;
+
+    //아이템
+
+    //레이져
+
 
     void Start()
     {
@@ -15,7 +23,7 @@ public class Player : MonoBehaviour
     
     void Update()
     {
-        //����Ű������ ������
+        //방향키에따른 움직임
         float moveX = moveSpeed * Time.deltaTime * Input.GetAxis("Horizontal");
         float moveY = moveSpeed * Time.deltaTime * Input.GetAxis("Vertical");
 
@@ -41,11 +49,29 @@ public class Player : MonoBehaviour
             ani.SetBool("up", false);
         }
 
+        //스페이스
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            //프리팹 위치 방향 넣고 생성
+            Instantiate(bullet, pos.position, Quaternion.identity);
+        }
+
 
 
 
 
             transform.Translate(moveX, moveY, 0);
+
+
+
+        //캐릭터의 월드 좌표를 뷰포트 좌표계로 변환해준다.
+        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
+        viewPos.x = Mathf.Clamp01(viewPos.x); //x값을 0이상, 1이하로 제한한다.
+        viewPos.y = Mathf.Clamp01(viewPos.y); //y값을 0이상, 1이하로 제한한다.
+        Vector3 worldPos = Camera.main.ViewportToWorldPoint(viewPos);//다시월드좌표로 변환
+        transform.position = worldPos; //좌표를 적용한다.
+
+
 
 
     }
