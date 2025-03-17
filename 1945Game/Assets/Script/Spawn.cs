@@ -9,10 +9,22 @@ public class Spawn : MonoBehaviour
     public float SpawnStop = 10; //스폰끝나는시간
     public GameObject monster;
     public GameObject monster2;
-
+    public GameObject Boss;
 
     bool swi = true;
     bool swi2 = true;
+
+
+    [SerializeField]
+    GameObject textBossWarning;
+
+
+    private void Awake()
+    {
+        textBossWarning.SetActive(false);
+    }
+
+
 
     void Start()
     {
@@ -23,7 +35,7 @@ public class Spawn : MonoBehaviour
     //코루틴으로 랜덤하게 생성하기
     IEnumerator RandomSpawn()
     {
-        while(swi)
+        while (swi)
         {
             //1초마다
             yield return new WaitForSeconds(StartTime);
@@ -41,7 +53,7 @@ public class Spawn : MonoBehaviour
         while (swi2)
         {
             //1초마다
-            yield return new WaitForSeconds(StartTime+2);
+            yield return new WaitForSeconds(StartTime + 2);
             //x값 랜덤
             float x = Random.Range(ss, es);
             //x값은 랜덤 y값은 자기자신값
@@ -66,7 +78,10 @@ public class Spawn : MonoBehaviour
     {
         swi2 = false;
         StopCoroutine("RandomSpawn2");
+        textBossWarning.SetActive(true);
         //보스
+        Vector3 pos = new Vector3(0, 2.97f, 0);
+        Instantiate(Boss, pos, Quaternion.identity);
 
     }
 }
