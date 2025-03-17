@@ -3,41 +3,58 @@ using UnityEngine;
 public class PBullet : MonoBehaviour
 {
     public float Speed = 4.0f;
-    //ê³µê²©ë ¥
-    //ì´í™íŠ¸
+    //°ø°İ·Â
+    //ÀÌÆåÆ®
     public GameObject effect;
         
     void Update()
     {
-        //ë¯¸ì‚¬ì¼ ìœ„ìª½ë°©í–¥ìœ¼ë¡œ ì›€ì§ì´ê¸°
-        //ìœ„ì˜ ë°©í–¥ * ìŠ¤í”¼ë“œ * íƒ€ì„
+        //¹Ì»çÀÏ À§ÂÊ¹æÇâÀ¸·Î ¿òÁ÷ÀÌ±â
+        //À§ÀÇ ¹æÇâ * ½ºÇÇµå * Å¸ÀÓ
         transform.Translate(Vector2.up * Speed * Time.deltaTime);
     }
 
 
-    //í™”ë©´ë°–ìœ¼ë¡œ ë‚˜ê°ˆê²½ìš°
+    //È­¸é¹ÛÀ¸·Î ³ª°¥°æ¿ì
     private void OnBecameInvisible()
     {
-        //ìê¸° ìì‹  ì§€ìš°ê¸°
+        //ÀÚ±â ÀÚ½Å Áö¿ì±â
         Destroy(gameObject);
     }
 
 
-    //ì¶©ëŒì²˜ë¦¬
+    //Ãæµ¹Ã³¸®
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Monster"))
         {
 
-            //ì´í™íŠ¸ìƒì„±
+
+
+
+            //ÀÌÆåÆ®»ı¼º
             GameObject go  = Instantiate(effect, transform.position, Quaternion.identity);
-            //1ì´ˆë’¤ì— ì§€ìš°ê¸°
+            //1ÃÊµÚ¿¡ Áö¿ì±â
             Destroy(go, 1);
 
-            //ëª¬ìŠ¤í„°
-            Destroy(collision.gameObject);
-            
-            //ë¯¸ì‚¬ì¼ ì‚­ì œ
+            //¸ó½ºÅÍ»èÁ¦
+            collision.gameObject.GetComponent<Monster>().Damage(1);
+
+            //¹Ì»çÀÏ »èÁ¦
+            Destroy(gameObject);
+
+        }
+
+
+        if (collision.CompareTag("Boss"))
+        {
+
+            //ÀÌÆåÆ®»ı¼º
+            GameObject go = Instantiate(effect, transform.position, Quaternion.identity);
+            //1ÃÊµÚ¿¡ Áö¿ì±â
+            Destroy(go, 1);        
+
+            //¹Ì»çÀÏ »èÁ¦
             Destroy(gameObject);
 
         }

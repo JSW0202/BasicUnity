@@ -7,11 +7,13 @@ public class Monster : MonoBehaviour
     public Transform ms1;
     public Transform ms2;
     public GameObject bullet;
+    //¾ÆÀÌÅÛ °¡Á®¿À±â
+    public GameObject Item = null;
 
     
     void Start()
     {
-        //í•œë²ˆí•¨ìˆ˜í˜¸ì¶œ
+        //ÇÑ¹øÇÔ¼öÈ£Ãâ
         Invoke("CreateBullet", Delay);
     }
 
@@ -20,7 +22,7 @@ public class Monster : MonoBehaviour
         Instantiate(bullet, ms1.position, Quaternion.identity);
         Instantiate(bullet, ms2.position, Quaternion.identity);
 
-        //ì¬ê·€í˜¸ì¶œ
+        //Àç±ÍÈ£Ãâ
         Invoke("CreateBullet", Delay);
     }
 
@@ -33,7 +35,7 @@ public class Monster : MonoBehaviour
 
     void Update()
     {
-        //ì•„ë˜ ë°©í–¥ìœ¼ë¡œ ì›€ì§ì—¬ë¼
+        //¾Æ·¡ ¹æÇâÀ¸·Î ¿òÁ÷¿©¶ó
         transform.Translate(Vector3.down * Speed * Time.deltaTime);
     }
 
@@ -41,4 +43,29 @@ public class Monster : MonoBehaviour
     {
         Destroy(gameObject);
     }
+
+
+
+    //¹Ì»çÀÏ¿¡ µû¸¥ µ¥¹ÌÁö ÀÔ´Â ÇÔ¼ö
+    public void Damage(int attack)
+    {
+        ItemDrop();
+        Destroy(gameObject);
+    }
+
+
+
+    public void ItemDrop()
+    {
+        //¾ÆÀÌÅÛ »ı¼º
+        Instantiate(Item, transform.position, Quaternion.identity);
+    }
+
+
+
+
+
+
+
+
 }

@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public float ss = -2; //ëª¬ìŠ¤í„° ìƒì„± xê°’ ì²˜ìŒ
-    public float es = 2;  //ëª¬ìŠ¤í„° ìƒì„± xê°’ ë
-    public float StartTime = 1; //ì‹œì‘
-    public float SpawnStop = 10; //ìŠ¤í°ëë‚˜ëŠ”ì‹œê°„
+    public float ss = -2; //¸ó½ºÅÍ »ı¼º x°ª Ã³À½
+    public float es = 2;  //¸ó½ºÅÍ »ı¼º x°ª ³¡
+    public float StartTime = 1; //½ÃÀÛ
+    public float SpawnStop = 10; //½ºÆù³¡³ª´Â½Ã°£
     public GameObject monster;
     public GameObject monster2;
 
@@ -20,33 +20,33 @@ public class Spawn : MonoBehaviour
         Invoke("Stop", SpawnStop);
     }
 
-    //ì½”ë£¨í‹´ìœ¼ë¡œ ëœë¤í•˜ê²Œ ìƒì„±í•˜ê¸°
+    //ÄÚ·çÆ¾À¸·Î ·£´ıÇÏ°Ô »ı¼ºÇÏ±â
     IEnumerator RandomSpawn()
     {
         while(swi)
         {
-            //1ì´ˆë§ˆë‹¤
+            //1ÃÊ¸¶´Ù
             yield return new WaitForSeconds(StartTime);
-            //xê°’ ëœë¤
+            //x°ª ·£´ı
             float x = Random.Range(ss, es);
-            //xê°’ì€ ëœë¤ yê°’ì€ ìê¸°ìì‹ ê°’
+            //x°ªÀº ·£´ı y°ªÀº ÀÚ±âÀÚ½Å°ª
             Vector2 r = new Vector2(x, transform.position.y);
-            //ëª¬ìŠ¤í„° ìƒì„±
+            //¸ó½ºÅÍ »ı¼º
             Instantiate(monster, r, Quaternion.identity);
         }
     }
-    //ì½”ë£¨í‹´ìœ¼ë¡œ ëœë¤í•˜ê²Œ ìƒì„±í•˜ê¸°
+    //ÄÚ·çÆ¾À¸·Î ·£´ıÇÏ°Ô »ı¼ºÇÏ±â
     IEnumerator RandomSpawn2()
     {
         while (swi2)
         {
-            //1ì´ˆë§ˆë‹¤
+            //1ÃÊ¸¶´Ù
             yield return new WaitForSeconds(StartTime+2);
-            //xê°’ ëœë¤
+            //x°ª ·£´ı
             float x = Random.Range(ss, es);
-            //xê°’ì€ ëœë¤ yê°’ì€ ìê¸°ìì‹ ê°’
+            //x°ªÀº ·£´ı y°ªÀº ÀÚ±âÀÚ½Å°ª
             Vector2 r = new Vector2(x, transform.position.y);
-            //ëª¬ìŠ¤í„° ìƒì„±
+            //¸ó½ºÅÍ »ı¼º
             Instantiate(monster2, r, Quaternion.identity);
         }
     }
@@ -54,10 +54,10 @@ public class Spawn : MonoBehaviour
     {
         swi = false;
         StopCoroutine("RandomSpawn");
-        //ë‘ë²ˆì§¸ ëª¬ìŠ¤í„° ì½”ë£¨í‹´
+        //µÎ¹øÂ° ¸ó½ºÅÍ ÄÚ·çÆ¾
         StartCoroutine("RandomSpawn2");
 
-        //30ì´ˆë’¤ì— 2ë²ˆì§¸ ëª¬ìŠ¤í„° í˜¸ì¶œë©ˆì¶”ê¸°
+        //30ÃÊµÚ¿¡ 2¹øÂ° ¸ó½ºÅÍ È£Ãâ¸ØÃß±â
         Invoke("Stop2", SpawnStop + 20);
 
     }
@@ -66,7 +66,7 @@ public class Spawn : MonoBehaviour
     {
         swi2 = false;
         StopCoroutine("RandomSpawn2");
-        //ë³´ìŠ¤
+        //º¸½º
 
     }
 }

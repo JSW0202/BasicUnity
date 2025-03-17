@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    //ì•„ì´í…œ ê°€ì† ì†ë„
+    //¾ÆÀÌÅÛ °¡¼Ó ¼Óµµ
     public float ItemVelocity = 20f;
     Rigidbody2D rig = null;
 

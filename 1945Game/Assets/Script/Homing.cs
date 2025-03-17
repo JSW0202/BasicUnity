@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Homing : MonoBehaviour
 {
-    public GameObject target;  //í”Œë ˆì´ì–´
+    public GameObject target;  //ÇÃ·¹ÀÌ¾î
     public float Speed = 3f;
     Vector2 dir;
     Vector2 dirNo;
@@ -10,12 +10,12 @@ public class Homing : MonoBehaviour
 
     void Start()
     {
-        //í”Œë ˆì´ì–´ íƒœê·¸ë¡œ ì°¾ê¸°
+        //ÇÃ·¹ÀÌ¾î ÅÂ±×·Î Ã£±â
         target = GameObject.FindGameObjectWithTag("Player");
 
-        //A - B  Aë°”ë¼ë³´ëŠ” ë²¡í„°     í”Œë ˆì´ì–´ - ë¯¸ì‚¬ì¼ 
+        //A - B  A¹Ù¶óº¸´Â º¤ÅÍ     ÇÃ·¹ÀÌ¾î - ¹Ì»çÀÏ 
         dir = target.transform.position - transform.position;
-        //ë°©í–¥ë²¡í„°ë§Œ êµ¬í•˜ê¸° ë‹¨ìœ„ë²¡í„° ì •ê·œí™” ë…¸ë§ 1ì˜ í¬ê¸°ë¡œ ë§Œë“ ë‹¤.
+        //¹æÇâº¤ÅÍ¸¸ ±¸ÇÏ±â ´ÜÀ§º¤ÅÍ Á¤±ÔÈ­ ³ë¸» 1ÀÇ Å©±â·Î ¸¸µç´Ù.
         dirNo = dir.normalized;
        
     }
