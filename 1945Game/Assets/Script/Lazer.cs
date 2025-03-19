@@ -9,10 +9,10 @@ public class Lazer : MonoBehaviour
 
     void Start()
     {
-        pos = GameObject.Find("Player").GetComponent<Player>().pos;
+        pos = GameObject.Find("Player").GetComponent<Player>().pos;      
     }
 
-
+    
     void Update()
     {
         transform.position = pos.position;
@@ -20,7 +20,7 @@ public class Lazer : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Monster"))
+        if(collision.CompareTag("Monster"))
         {
             collision.gameObject.GetComponent<Monster>().Damage(Attack++);
 
@@ -49,10 +49,19 @@ public class Lazer : MonoBehaviour
         }
     }
 
+
+
+
+
+
+
+
     void CreateEffect(Vector3 position)
     {
         GameObject go = Instantiate(effect, position, Quaternion.identity);
         Destroy(go, 1);
     }
+
+
 
 }

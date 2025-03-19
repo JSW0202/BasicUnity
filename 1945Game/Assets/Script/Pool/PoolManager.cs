@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// ¿ÀºêÁ§Æ® Ç®ÀÇ Àü¹İÀûÀÎ °ü¸®¸¦ ´ã´çÇÏ´Â ¸Å´ÏÀú Å¬·¡½º
+// ì˜¤ë¸Œì íŠ¸ í’€ì˜ ì „ë°˜ì ì¸ ê´€ë¦¬ë¥¼ ë‹´ë‹¹í•˜ëŠ” ë§¤ë‹ˆì € í´ë˜ìŠ¤
 
 public class PoolManager : MonoBehaviour
 {
 
-    // ½Ì±ÛÅæ ÀÎ½ºÅÏ½º
+    // ì‹±ê¸€í†¤ ì¸ìŠ¤í„´ìŠ¤
     private static PoolManager instance;
     public static PoolManager Instance
     {
@@ -23,11 +23,11 @@ public class PoolManager : MonoBehaviour
         }
     }
 
-    // ÇÁ¸®ÆÕ ÀÌ¸§À» Å°·Î »ç¿ëÇÏ´Â Ç® µñ¼Å³Ê¸®
+    // í”„ë¦¬íŒ¹ ì´ë¦„ì„ í‚¤ë¡œ ì‚¬ìš©í•˜ëŠ” í’€ ë”•ì…”ë„ˆë¦¬
     private Dictionary<string, ObjectPool> pools = new Dictionary<string, ObjectPool>();
 
-    // »õ·Î¿î ¿ÀºêÁ§Æ® Ç®À» »ı¼ºÇÏ´Â ¸Ş¼­µå
-    // prefab: Ç®¸µÇÒ ÇÁ¸®ÆÕ, initialSize: ÃÊ±â Ç® Å©±â
+    // ìƒˆë¡œìš´ ì˜¤ë¸Œì íŠ¸ í’€ì„ ìƒì„±í•˜ëŠ” ë©”ì„œë“œ
+    // prefab: í’€ë§í•  í”„ë¦¬íŒ¹, initialSize: ì´ˆê¸° í’€ í¬ê¸°
     public void CreatePool(GameObject prefab, int initialSize)
     {
         string key = prefab.name;
@@ -38,8 +38,8 @@ public class PoolManager : MonoBehaviour
     }
 
 
-    // Ç®¿¡¼­ ¿ÀºêÁ§Æ®¸¦ °¡Á®¿À´Â ¸Ş¼­µå
-    // ¿äÃ»ÇÑ ÇÁ¸®ÆÕÀÇ Ç®ÀÌ ¾ø´Ù¸é »õ·Î »ı¼º
+    // í’€ì—ì„œ ì˜¤ë¸Œì íŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œ
+    // ìš”ì²­í•œ í”„ë¦¬íŒ¹ì˜ í’€ì´ ì—†ë‹¤ë©´ ìƒˆë¡œ ìƒì„±
     public GameObject Get(GameObject prefab)
     {
         string key = prefab.name;
@@ -51,7 +51,7 @@ public class PoolManager : MonoBehaviour
     }
 
 
-    // »ç¿ëÀÌ ³¡³­ ¿ÀºêÁ§Æ®¸¦ Ç®·Î ¹İÈ¯ÇÏ´Â ¸Ş¼­µå
+    // ì‚¬ìš©ì´ ëë‚œ ì˜¤ë¸Œì íŠ¸ë¥¼ í’€ë¡œ ë°˜í™˜í•˜ëŠ” ë©”ì„œë“œ
     public void Return(GameObject obj)
     {
         string key = obj.name.Replace("(Clone)", "");

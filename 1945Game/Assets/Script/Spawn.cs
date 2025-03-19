@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class Spawn : MonoBehaviour
 {
-    public float ss = -2; //¸ó½ºÅÍ »ı¼º x°ª Ã³À½
-    public float es = 2;  //¸ó½ºÅÍ »ı¼º x°ª ³¡
-    public float StartTime = 1; //½ÃÀÛ
-    public float SpawnStop = 10; //½ºÆù³¡³ª´Â½Ã°£
+    public float ss = -2; //ëª¬ìŠ¤í„° ìƒì„± xê°’ ì²˜ìŒ
+    public float es = 2;  //ëª¬ìŠ¤í„° ìƒì„± xê°’ ë
+    public float StartTime = 1; //ì‹œì‘
+    public float SpawnStop = 10; //ìŠ¤í°ëë‚˜ëŠ”ì‹œê°„
     public GameObject monster;
     public GameObject monster2;
     public GameObject Boss;
@@ -22,6 +22,9 @@ public class Spawn : MonoBehaviour
     private void Awake()
     {
         textBossWarning.SetActive(false);
+
+        //PoolManager.Instance.CreatePool(monster, 10);
+
     }
 
 
@@ -32,33 +35,35 @@ public class Spawn : MonoBehaviour
         Invoke("Stop", SpawnStop);
     }
 
-    //ÄÚ·çÆ¾À¸·Î ·£´ıÇÏ°Ô »ı¼ºÇÏ±â
+    //ì½”ë£¨í‹´ìœ¼ë¡œ ëœë¤í•˜ê²Œ ìƒì„±í•˜ê¸°
     IEnumerator RandomSpawn()
     {
-        while (swi)
+        while(swi)
         {
-            //1ÃÊ¸¶´Ù
+            //1ì´ˆë§ˆë‹¤
             yield return new WaitForSeconds(StartTime);
-            //x°ª ·£´ı
+            //xê°’ ëœë¤
             float x = Random.Range(ss, es);
-            //x°ªÀº ·£´ı y°ªÀº ÀÚ±âÀÚ½Å°ª
+            //xê°’ì€ ëœë¤ yê°’ì€ ìê¸°ìì‹ ê°’
             Vector2 r = new Vector2(x, transform.position.y);
-            //¸ó½ºÅÍ »ı¼º
+            //ëª¬ìŠ¤í„° ìƒì„±
             Instantiate(monster, r, Quaternion.identity);
+            //GameObject enemy =  PoolManager.Instance.Get(monster);
+            //enemy.transform.position = r;
         }
     }
-    //ÄÚ·çÆ¾À¸·Î ·£´ıÇÏ°Ô »ı¼ºÇÏ±â
+    //ì½”ë£¨í‹´ìœ¼ë¡œ ëœë¤í•˜ê²Œ ìƒì„±í•˜ê¸°
     IEnumerator RandomSpawn2()
     {
         while (swi2)
         {
-            //1ÃÊ¸¶´Ù
-            yield return new WaitForSeconds(StartTime + 2);
-            //x°ª ·£´ı
+            //1ì´ˆë§ˆë‹¤
+            yield return new WaitForSeconds(StartTime+2);
+            //xê°’ ëœë¤
             float x = Random.Range(ss, es);
-            //x°ªÀº ·£´ı y°ªÀº ÀÚ±âÀÚ½Å°ª
+            //xê°’ì€ ëœë¤ yê°’ì€ ìê¸°ìì‹ ê°’
             Vector2 r = new Vector2(x, transform.position.y);
-            //¸ó½ºÅÍ »ı¼º
+            //ëª¬ìŠ¤í„° ìƒì„±
             Instantiate(monster2, r, Quaternion.identity);
         }
     }
@@ -66,10 +71,10 @@ public class Spawn : MonoBehaviour
     {
         swi = false;
         StopCoroutine("RandomSpawn");
-        //µÎ¹øÂ° ¸ó½ºÅÍ ÄÚ·çÆ¾
+        //ë‘ë²ˆì§¸ ëª¬ìŠ¤í„° ì½”ë£¨í‹´
         StartCoroutine("RandomSpawn2");
 
-        //30ÃÊµÚ¿¡ 2¹øÂ° ¸ó½ºÅÍ È£Ãâ¸ØÃß±â
+        //30ì´ˆë’¤ì— 2ë²ˆì§¸ ëª¬ìŠ¤í„° í˜¸ì¶œë©ˆì¶”ê¸°
         Invoke("Stop2", SpawnStop + 20);
 
     }
@@ -79,9 +84,22 @@ public class Spawn : MonoBehaviour
         swi2 = false;
         StopCoroutine("RandomSpawn2");
         textBossWarning.SetActive(true);
-        //º¸½º
+        StartCoroutine("Shake");
+        //ë³´ìŠ¤
         Vector3 pos = new Vector3(0, 2.97f, 0);
         Instantiate(Boss, pos, Quaternion.identity);
+
+    }
+
+    IEnumerator Shake()
+    {
+        yield return new WaitForSeconds(0.2f);
+        CameraShake.instance.CameraShakeShow();
+        yield return new WaitForSeconds(0.2f);
+        CameraShake.instance.CameraShakeShow();
+        yield return new WaitForSeconds(0.2f);
+        CameraShake.instance.CameraShakeShow();
+
 
     }
 }

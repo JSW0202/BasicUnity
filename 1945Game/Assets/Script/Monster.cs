@@ -9,12 +9,13 @@ public class Monster : MonoBehaviour
     public Transform ms1;
     public Transform ms2;
     public GameObject bullet;
-    //¾ÆÀÌÅÛ °¡Á®¿À±â
+    //ì•„ì´í…œ ê°€ì ¸ì˜¤ê¸°
     public GameObject Item = null;
 
+    
     void Start()
     {
-        //ÇÑ¹øÇÔ¼öÈ£Ãâ
+        //í•œë²ˆí•¨ìˆ˜í˜¸ì¶œ
         Invoke("CreateBullet", Delay);
     }
 
@@ -23,39 +24,59 @@ public class Monster : MonoBehaviour
         Instantiate(bullet, ms1.position, Quaternion.identity);
         Instantiate(bullet, ms2.position, Quaternion.identity);
 
-        //Àç±ÍÈ£Ãâ
+        //ì¬ê·€í˜¸ì¶œ
         Invoke("CreateBullet", Delay);
     }
 
 
+
+
+
+
+
+
     void Update()
     {
-        //¾Æ·¡ ¹æÇâÀ¸·Î ¿òÁ÷¿©¶ó
+        //ì•„ë˜ ë°©í–¥ìœ¼ë¡œ ì›€ì§ì—¬ë¼
         transform.Translate(Vector3.down * Speed * Time.deltaTime);
     }
 
     private void OnBecameInvisible()
     {
         Destroy(gameObject);
+       // PoolManager.Instance.Return(gameObject);
     }
 
-    //¹Ì»çÀÏ¿¡ µû¸¥ µ¥¹ÌÁö ÀÔ´Â ÇÔ¼ö
+
+
+    //ë¯¸ì‚¬ì¼ì— ë”°ë¥¸ ë°ë¯¸ì§€ ì…ëŠ” í•¨ìˆ˜
     public void Damage(int attack)
     {
         HP -= attack;
 
-        if (HP <= 0)
+        if(HP <=0)
         {
             ItemDrop();
-            Destroy(gameObject);
+             Destroy(gameObject);
+            //PoolManager.Instance.Return(gameObject);
         }
 
-
+      
     }
+
+
+
     public void ItemDrop()
     {
-        //¾ÆÀÌÅÛ »ı¼º
+        //ì•„ì´í…œ ìƒì„±
         Instantiate(Item, transform.position, Quaternion.identity);
     }
+
+
+
+
+
+
+
 
 }

@@ -4,37 +4,37 @@ using UnityEngine;
 
 
 
-// ÇÁ¸®ÆÕ°ú ÃÊ±â Å©±â¸¦ ¹Þ¾Æ Ç® ÃÊ±âÈ­:
+// í”„ë¦¬íŒ¹ê³¼ ì´ˆê¸° í¬ê¸°ë¥¼ ë°›ì•„ í’€ ì´ˆê¸°í™”:
 
-// »ý¼ºÀÚ¿¡¼­ ÇÁ¸®ÆÕ°ú ÃÊ±â Å©±â¸¦ ¹Þ¾Æ Ç®À» ÃÊ±âÈ­ÇÕ´Ï´Ù.
-// ÃÊ±â Å©±â¸¸Å­ ¿ÀºêÁ§Æ®¸¦ »ý¼ºÇÏ¿© Ç®¿¡ Ãß°¡ÇÕ´Ï´Ù.
-// »õ·Î¿î ¿ÀºêÁ§Æ®¸¦ »ý¼ºÇÏ¿© Ç®¿¡ Ãß°¡:
+// ìƒì„±ìžì—ì„œ í”„ë¦¬íŒ¹ê³¼ ì´ˆê¸° í¬ê¸°ë¥¼ ë°›ì•„ í’€ì„ ì´ˆê¸°í™”í•©ë‹ˆë‹¤.
+// ì´ˆê¸° í¬ê¸°ë§Œí¼ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•˜ì—¬ í’€ì— ì¶”ê°€í•©ë‹ˆë‹¤.
+// ìƒˆë¡œìš´ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•˜ì—¬ í’€ì— ì¶”ê°€:
 
-// CreateNewObject ¸Þ¼­µå´Â »õ·Î¿î ¿ÀºêÁ§Æ®¸¦ »ý¼ºÇÏ°í ºñÈ°¼ºÈ­ »óÅÂ·Î Ç®¿¡ Ãß°¡ÇÕ´Ï´Ù.
-// Ç®¿¡¼­ »ç¿ë °¡´ÉÇÑ ¿ÀºêÁ§Æ®¸¦ °¡Á®¿À±â:
+// CreateNewObject ë©”ì„œë“œëŠ” ìƒˆë¡œìš´ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•˜ê³  ë¹„í™œì„±í™” ìƒíƒœë¡œ í’€ì— ì¶”ê°€í•©ë‹ˆë‹¤.
+// í’€ì—ì„œ ì‚¬ìš© ê°€ëŠ¥í•œ ì˜¤ë¸Œì íŠ¸ë¥¼ ê°€ì ¸ì˜¤ê¸°:
 
-// Get ¸Þ¼­µå´Â Ç®¿¡¼­ »ç¿ë °¡´ÉÇÑ ¿ÀºêÁ§Æ®¸¦ °¡Á®¿É´Ï´Ù.
-// Ç®ÀÌ ºñ¾îÀÖÀ¸¸é »õ·Î¿î ¿ÀºêÁ§Æ®¸¦ »ý¼ºÇÕ´Ï´Ù.
-// °¡Á®¿Â ¿ÀºêÁ§Æ®¸¦ È°¼ºÈ­ »óÅÂ·Î ¹ÝÈ¯ÇÕ´Ï´Ù.
-// »ç¿ëÀÌ ³¡³­ ¿ÀºêÁ§Æ®¸¦ Ç®·Î ¹ÝÈ¯:
+// Get ë©”ì„œë“œëŠ” í’€ì—ì„œ ì‚¬ìš© ê°€ëŠ¥í•œ ì˜¤ë¸Œì íŠ¸ë¥¼ ê°€ì ¸ì˜µë‹ˆë‹¤.
+// í’€ì´ ë¹„ì–´ìžˆìœ¼ë©´ ìƒˆë¡œìš´ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•©ë‹ˆë‹¤.
+// ê°€ì ¸ì˜¨ ì˜¤ë¸Œì íŠ¸ë¥¼ í™œì„±í™” ìƒíƒœë¡œ ë°˜í™˜í•©ë‹ˆë‹¤.
+// ì‚¬ìš©ì´ ëë‚œ ì˜¤ë¸Œì íŠ¸ë¥¼ í’€ë¡œ ë°˜í™˜:
 
-// Return ¸Þ¼­µå´Â »ç¿ëÀÌ ³¡³­ ¿ÀºêÁ§Æ®¸¦ ºñÈ°¼ºÈ­ »óÅÂ·Î Ç®¿¡ ¹ÝÈ¯ÇÕ´Ï´Ù.
-// ÀÌ Å¬·¡½º´Â ¿ÀºêÁ§Æ® Ç®¸µÀ» ÅëÇØ ¿ÀºêÁ§Æ® »ý¼º°ú ÆÄ±«¿¡ µû¸¥ ¼º´É ÀúÇÏ¸¦ ÁÙÀÌ°í, ¸Þ¸ð¸® °ü¸®¸¦ È¿À²ÀûÀ¸·Î ÇÒ ¼ö ÀÖµµ·Ï µµ¿ÍÁÝ´Ï´Ù.
+// Return ë©”ì„œë“œëŠ” ì‚¬ìš©ì´ ëë‚œ ì˜¤ë¸Œì íŠ¸ë¥¼ ë¹„í™œì„±í™” ìƒíƒœë¡œ í’€ì— ë°˜í™˜í•©ë‹ˆë‹¤.
+// ì´ í´ëž˜ìŠ¤ëŠ” ì˜¤ë¸Œì íŠ¸ í’€ë§ì„ í†µí•´ ì˜¤ë¸Œì íŠ¸ ìƒì„±ê³¼ íŒŒê´´ì— ë”°ë¥¸ ì„±ëŠ¥ ì €í•˜ë¥¼ ì¤„ì´ê³ , ë©”ëª¨ë¦¬ ê´€ë¦¬ë¥¼ íš¨ìœ¨ì ìœ¼ë¡œ í•  ìˆ˜ ìžˆë„ë¡ ë„ì™€ì¤ë‹ˆë‹¤.
 
 
-public class ObjectPool
+public class ObjectPool 
 {
 
-    // Ç®¸µÇÒ ÇÁ¸®ÆÕ
+    // í’€ë§í•  í”„ë¦¬íŒ¹
     private GameObject prefab;
 
-    // ºñÈ°¼ºÈ­µÈ ¿ÀºêÁ§Æ®µéÀ» º¸°üÇÏ´Â Å¥
+    // ë¹„í™œì„±í™”ëœ ì˜¤ë¸Œì íŠ¸ë“¤ì„ ë³´ê´€í•˜ëŠ” í
     private Queue<GameObject> pool;
 
-    // Ç®¸µµÈ ¿ÀºêÁ§Æ®µéÀÇ ºÎ¸ð Æ®·£½ºÆû
+    // í’€ë§ëœ ì˜¤ë¸Œì íŠ¸ë“¤ì˜ ë¶€ëª¨ íŠ¸ëžœìŠ¤í¼
     private Transform parent;
 
-    // »ý¼ºÀÚ: ÇÁ¸®ÆÕ°ú ÃÊ±â Å©±â¸¦ ¹Þ¾Æ Ç® ÃÊ±âÈ­
+    // ìƒì„±ìž: í”„ë¦¬íŒ¹ê³¼ ì´ˆê¸° í¬ê¸°ë¥¼ ë°›ì•„ í’€ ì´ˆê¸°í™”
     public ObjectPool(GameObject prefab, int initialSize, Transform parent = null)
     {
         this.prefab = prefab;
@@ -46,15 +46,15 @@ public class ObjectPool
             CreateNewObject();
         }
     }
-    // »õ·Î¿î ¿ÀºêÁ§Æ®¸¦ »ý¼ºÇÏ¿© Ç®¿¡ Ãß°¡ÇÏ´Â private ¸Þ¼­µå
+    // ìƒˆë¡œìš´ ì˜¤ë¸Œì íŠ¸ë¥¼ ìƒì„±í•˜ì—¬ í’€ì— ì¶”ê°€í•˜ëŠ” private ë©”ì„œë“œ
     private void CreateNewObject()
     {
         GameObject obj = GameObject.Instantiate(prefab, parent);
         obj.SetActive(false);
         pool.Enqueue(obj);
     }
-    // Ç®¿¡¼­ »ç¿ë °¡´ÉÇÑ ¿ÀºêÁ§Æ®¸¦ °¡Á®¿À´Â ¸Þ¼­µå
-    // Ç®ÀÌ ºñ¾îÀÖÀ¸¸é »õ·Î »ý¼º
+    // í’€ì—ì„œ ì‚¬ìš© ê°€ëŠ¥í•œ ì˜¤ë¸Œì íŠ¸ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œ
+    // í’€ì´ ë¹„ì–´ìžˆìœ¼ë©´ ìƒˆë¡œ ìƒì„±
     public GameObject Get()
     {
         if (pool.Count == 0)
@@ -68,7 +68,7 @@ public class ObjectPool
     }
 
 
-    // »ç¿ëÀÌ ³¡³­ ¿ÀºêÁ§Æ®¸¦ Ç®·Î ¹ÝÈ¯ÇÏ´Â ¸Þ¼­µå
+    // ì‚¬ìš©ì´ ëë‚œ ì˜¤ë¸Œì íŠ¸ë¥¼ í’€ë¡œ ë°˜í™˜í•˜ëŠ” ë©”ì„œë“œ
     public void Return(GameObject obj)
     {
         obj.SetActive(false);

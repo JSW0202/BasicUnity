@@ -4,55 +4,51 @@ using UnityEngine;
 
 public class TMPColor : MonoBehaviour
 {
-    //»ö»ó ÀüÈ¯¿¡ °É¸®´Â ½Ã°£
+    //ìƒ‰ìƒ ì „í™˜ì— ê±¸ë¦¬ëŠ” ì‹œê°„
     [SerializeField]
     float lerpTime = 0.1f;
 
-    //ÅØ½ºÆ® ÄÄÆ÷³ÍÆ®
+    //í…ìŠ¤íŠ¸ ì»´í¬ë„ŒíŠ¸
     TextMeshProUGUI textBossWarning;
 
 
-    //Awake ¸Ş¼­µå : ÄÄÆ÷³ÍÆ® ÃÊ±âÈ­
+    //Awake ë©”ì„œë“œ : ì»´í¬ë„ŒíŠ¸ ì´ˆê¸°í™”
     private void Awake()
     {
         textBossWarning = GetComponent<TextMeshProUGUI>();
     }
 
-    //OnEnable¸Ş¼­µå : ¿ÀºêÁ§Æ®°¡ È°¼ºÈ­µÉ¶§ È£Ãâ
+    //OnEnableë©”ì„œë“œ : ì˜¤ë¸Œì íŠ¸ê°€ í™œì„±í™”ë ë•Œ í˜¸ì¶œ
     private void OnEnable()
     {
         StartCoroutine("ColorLerpLoop");
     }
 
 
-    //»ö»ó ÀüÈ¯ ·çÇÁ ÄÚ·çÆ¾
+    //ìƒ‰ìƒ ì „í™˜ ë£¨í”„ ì½”ë£¨í‹´
     IEnumerator ColorLerpLoop()
     {
-        while (true)
+        while(true)
         {
             yield return StartCoroutine(ColorLerp(Color.white, Color.red));
             yield return StartCoroutine(ColorLerp(Color.red, Color.white));
         }
     }
 
-    //»ö»ó ÀüÈ¯ ÄÚ·çÆ¾
+    //ìƒ‰ìƒ ì „í™˜ ì½”ë£¨í‹´
     IEnumerator ColorLerp(Color startColor, Color endColor)
     {
         float currentTime = 0.0f;
         float percent = 0.0f;
 
-        while (percent < 1)
+        while(percent < 1)
         {
             currentTime += Time.deltaTime;
             percent = currentTime / lerpTime;
             textBossWarning.color = Color.Lerp(startColor, endColor, percent);
+            //textBossWarning.faceColor = Color.Lerp(startColor, endColor, percent);
             yield return null;
         }
     }
-
-
-
-
-
 
 }
